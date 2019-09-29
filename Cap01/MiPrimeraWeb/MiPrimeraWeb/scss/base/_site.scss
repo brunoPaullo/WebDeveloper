@@ -1,0 +1,35 @@
+﻿body {
+    background-color: $background-color; //variable
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    /*mixin:*/
+    @include break-point (md) {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+
+    header {
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        border-width: 0 0 1px;
+        background-color: $site-color-black;
+        height: 4rem;
+    }
+
+    footer {
+        background-color: $site-color-white;
+        color: $site-color-white;
+        height: 2rem;
+        position: fixed;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    section{
+        padding-left:4rem;
+        padding-top:4rem;
+    }
+}

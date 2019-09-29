@@ -1,0 +1,6 @@
+---Patrones---
+
+Patron de Aquitectuta
+	Como esta compuesto el proyecto
+Patron de Diseño
+	Solucion a un problema en especifico.
