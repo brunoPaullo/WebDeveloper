@@ -1,0 +1,23 @@
+Sistema de Control de Versiones
+Git --> SCM
+
+Repositorios
+	GitHub
+	BitBucket
+
+---Utilities
+Git paleta de comandos
+
+
+---Pilas
+	---Agregar a lista
+		git stash
+		git stash list
+	---Traer Cambios remotos
+		git pull
+	---Subir Cambios
+		git stash pop
+
+---Branch 
+	Master 
+	
