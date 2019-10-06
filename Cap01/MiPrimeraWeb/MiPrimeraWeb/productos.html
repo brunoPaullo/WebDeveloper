@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/3ec0969d1f.js"></script>
 </head>
 <body>
     <header>
@@ -23,9 +25,20 @@
         <h3>Nuestros Productos</h3>
     </section>
     <section>
-        <video preload="auto" width="320" height="240" id="video" controls>
-            <source src="/media/video/video.mp4" type="video/mp4" media="" />
+        <video preload="auto" width="320" height="240" id="video">
+            <source src="/media/video.mp4" type="video/mp4" media="" />
         </video>
+        <div>
+            <button class="btn btn-success" onclick="cibertec.video.play();">
+                <i class="fa fa-play"></i>
+            </button>
+            <button class="btn btn-success" onclick="cibertec.video.pause();">
+                <i class="fa fa-pause"></i>
+            </button>
+            <button class="btn btn-success" onclick="cibertec.video.stop();">
+                <i class="fa fa-stop"></i>
+            </button>
+        </div>
     </section>
     <section>
         <audio controls>
@@ -35,5 +48,6 @@
     <footer>
         Cibertec &copy; Todos los derechos reservados.
     </footer>
+    <script src="scripts/productos.js"></script>
 </body>
 </html>

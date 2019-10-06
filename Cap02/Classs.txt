@@ -1,0 +1,26 @@
+DOM --> Document Object Model
+
+Complilado
+.C#
+.Java.
+	Pasar codigo del alto nivel a lenguaje de maquina.
+Interpretado
+.Javascript
+	Pasa por un interpretador.
+
+Jquery --> Libreria
+Json --> Formato de informacion
+Ajax --> Tecnologia para renderizar paginas dinamicas.
+	 Peticiones Get, Post
+
+
+Google
+1. Crear proyeto
+2. Buscador de Apis
+3. Maps Javascrit API
+4. Habilitar
+5. Crear Credenciales / Clave API
+6. Restringir API
+
+
+
