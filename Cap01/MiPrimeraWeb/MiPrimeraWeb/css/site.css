@@ -102,3 +102,7 @@ nav {
       font-size: 1rem; }
       .button-base:hover, .menu-title:hover {
         background-color: #575656; } }
+
+.map {
+  width: 100%;
+  height: 400px; }
