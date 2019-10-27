@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cibertec.Repositories.NorthWind
 {
-    public interface ICustomerRepository : IRepository<Customers>
+    public interface ISuppliersRepository : IRepository<Suppliers>
     {
     }
 }

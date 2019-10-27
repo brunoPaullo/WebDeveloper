@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace Cibertec.Repositories.Dapper.NorthWind
 {
-   public class CustomerRepository: Repository<Customers>, ICustomerRepository
+    public class ProductsRepository : Repository<Products>, IProductRepository
     {
-
-        public CustomerRepository(string connectionString) : base(connectionString)
+        public ProductsRepository(string connectionString) : base(connectionString)
         {
-
         }
     }
 }

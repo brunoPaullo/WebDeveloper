@@ -9,6 +9,10 @@ namespace Cibertec.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        ICustomerRepository Customers{ get;}
+        ICustomerRepository Customers { get; }
+        IOrderDetailsRepository Details { get; }
+        IOrdersRepository Orders { get; }
+        IProductRepository Products { get; }
+        ISuppliersRepository Suppliers { get; }
     }
 }

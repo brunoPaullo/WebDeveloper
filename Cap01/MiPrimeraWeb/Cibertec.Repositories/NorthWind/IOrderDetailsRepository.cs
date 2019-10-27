@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Cibertec.Repositories.NorthWind
 {
-    public interface ICustomerRepository : IRepository<Customers>
+    public interface IOrderDetailsRepository: IRepository<OrderDetails>
     {
+       List<OrderDetails> GetListById(int id);
     }
 }

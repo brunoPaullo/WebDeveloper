@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.2.0.30\lib\net461\Dapper.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -126,7 +132,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderItemController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +179,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\OrderItem\Details.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Suppliers\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -185,6 +202,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cibertec.Model\Cibertec.Models.csproj">
+      <Project>{d4d0348c-8ad7-4166-8062-699a23245cdf}</Project>
+      <Name>Cibertec.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cibertec.Repositories.Data\Cibertec.Repositories.Dapper.csproj">
+      <Project>{0f857ce7-ff97-476e-a190-8099c8a18ad8}</Project>
+      <Name>Cibertec.Repositories.Dapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cibertec.Repositories\Cibertec.Repositories.csproj">
+      <Project>{ea03a3e1-8f61-45a1-a5f6-209f69c78538}</Project>
+      <Name>Cibertec.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cibertec.UnitOfWork\Cibertec.UnitOfWork.csproj">
+      <Project>{20d85d9b-2650-40eb-ad33-c7d3d84c9605}</Project>
+      <Name>Cibertec.UnitOfWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
