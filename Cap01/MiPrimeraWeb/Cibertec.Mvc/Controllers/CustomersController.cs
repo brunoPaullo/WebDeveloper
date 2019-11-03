@@ -13,9 +13,14 @@ namespace Cibertec.Mvc.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CustomersController()
+        /*public CustomersController()
         {
             _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
+        }*/
+
+        public CustomersController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
         }
         // GET: Customer
         public ActionResult Index()

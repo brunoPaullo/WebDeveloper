@@ -9,6 +9,6 @@ namespace Cibertec.Repositories.NorthWind
 {
     public interface IOrderDetailsRepository: IRepository<OrderDetails>
     {
-       List<OrderDetails> GetListById(int id);
+       IEnumerable<OrderDetails> GetListByOrderId(int id);
     }
 }

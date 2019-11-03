@@ -25,7 +25,7 @@ namespace Cibertec.Mvc.Controllers
 
         public ActionResult Details(int id)
         {
-            var model = _unitOfWork.Details.GetListById(id);
+            var model = _unitOfWork.Details.GetListByOrderId(id);
             return View(model);
         }
     }

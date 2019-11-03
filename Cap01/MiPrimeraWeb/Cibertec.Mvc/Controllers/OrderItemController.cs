@@ -20,7 +20,7 @@ namespace Cibertec.Mvc.Controllers
         // GET: OrderItem
         public ActionResult Index(int id)
         {
-            return View(_UnitOfWork.Details.GetListById(id));
+            return View(_UnitOfWork.Details.GetListByOrderId(id));
         }
     }
 }
