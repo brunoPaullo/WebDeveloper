@@ -1,4 +1,5 @@
-﻿using Cibertec.Repositories.Dapper.NorthWind;
+﻿using Cibertec.Models;
+using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,56 @@ namespace Cibertec.Mvc.Controllers
         public ActionResult Index()
         {
             return View(_unitOfWork.Customers.GetList()); ;
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customers customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Customers.Insert(customer);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Update(string id)
+        {
+            var customer = _unitOfWork.Customers.GetById(id);
+            return View(customer);
+        }
+
+
+        [HttpPost]
+        public ActionResult Update(Customers customer)
+        {
+            if (!ModelState.IsValid)
+            {
+                customer.Id = 0;
+                _unitOfWork.Customers.Update(customer);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
+        public ActionResult Delete(string id)
+        {
+            var customer = _unitOfWork.Customers.GetById(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Customers customer)
+        {
+            _unitOfWork.Customers.Delete(customer.CustomerID);
+            return RedirectToAction("Index");
+
         }
     }
 }
