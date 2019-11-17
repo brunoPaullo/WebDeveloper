@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Cibertec.Repositories.NorthWind
 {
-    public interface IProductRepository: IRepository<Products>
+    public interface IProductRepository : IRepository<Products>
     {
+        new int Insert(Products entity);
+        bool Delete(int id);
+        new Products GetById(int id);
+        new bool Update(Products entity);
     }
 }

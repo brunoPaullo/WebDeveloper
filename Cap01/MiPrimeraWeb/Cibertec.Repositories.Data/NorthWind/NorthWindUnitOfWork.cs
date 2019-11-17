@@ -17,6 +17,7 @@ namespace Cibertec.Repositories.Dapper.NorthWind
             Orders = new OrdersRepository(connectionString);
             Products = new ProductsRepository(connectionString);
             Suppliers = new SuppliersRepository(connectionString);
+            Employess = new EmployeesRepository(connectionString);
         } 
         
         public ICustomerRepository Customers { get; private set; }
@@ -28,5 +29,7 @@ namespace Cibertec.Repositories.Dapper.NorthWind
         public IProductRepository Products { get; private set; }
 
         public ISuppliersRepository Suppliers { get; private set; }
+
+        public IEmployessRepository Employess { get; private set; }
     }
 }

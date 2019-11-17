@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NorthWind\CustomerRepository.cs" />
+    <Compile Include="NorthWind\EmployeesRepository.cs" />
     <Compile Include="NorthWind\NorthWindUnitOfWork.cs" />
     <Compile Include="NorthWind\OrderDetailsRepository.cs" />
     <Compile Include="NorthWind\OrdersRepository.cs" />

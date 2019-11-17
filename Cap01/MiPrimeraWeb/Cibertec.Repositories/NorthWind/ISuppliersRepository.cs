@@ -9,5 +9,9 @@ namespace Cibertec.Repositories.NorthWind
 {
     public interface ISuppliersRepository : IRepository<Suppliers>
     {
+        new int Insert(Suppliers entity);
+        bool Delete(int id);
+        new Suppliers GetById(int id);
+        new bool Update(Suppliers entity);
     }
 }

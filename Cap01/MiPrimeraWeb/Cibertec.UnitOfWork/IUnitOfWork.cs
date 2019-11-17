@@ -14,5 +14,6 @@ namespace Cibertec.UnitOfWork
         IOrdersRepository Orders { get; }
         IProductRepository Products { get; }
         ISuppliersRepository Suppliers { get; }
+        IEmployessRepository Employess { get; }
     }
 }

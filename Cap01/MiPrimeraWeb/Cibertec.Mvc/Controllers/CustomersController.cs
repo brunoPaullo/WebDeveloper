@@ -26,7 +26,7 @@ namespace Cibertec.Mvc.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            return View(_unitOfWork.Customers.GetList()); ;
+            return View(_unitOfWork.Customers.GetList());
         }
 
         public ActionResult Create()
@@ -53,6 +53,7 @@ namespace Cibertec.Mvc.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(Customers customer)
         {
             if (!ModelState.IsValid)
@@ -71,10 +72,16 @@ namespace Cibertec.Mvc.Controllers
             return View(customer);
         }
 
+        //[HttpGet]
         [HttpPost]
-        public ActionResult Delete(Customers customer)
+        //[HttpPut]
+        //[HttpPatch]
+        //[HttpDelete]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCustomer(string CustomerID)
         {
-            _unitOfWork.Customers.Delete(customer.CustomerID);
+            _unitOfWork.Customers.Delete(CustomerID);
             return RedirectToAction("Index");
 
         }
