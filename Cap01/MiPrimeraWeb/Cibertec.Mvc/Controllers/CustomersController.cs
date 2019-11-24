@@ -1,31 +1,32 @@
 ﻿using Cibertec.Models;
-using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+using log4net;
 using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUnitOfWork _unitOfWork;
 
         /*public CustomersController()
         {
             _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
         }*/
 
-        public CustomersController(IUnitOfWork unitOfWork)
+        public CustomersController(IUnitOfWork unitOfWork, ILog log) : base(unitOfWork, log)
         {
-            _unitOfWork = unitOfWork;
         }
+
+        public ActionResult Error()
+        {
+            throw new System.Exception("Prueba de validacion de error");
+        }
+
         // GET: Customer
         public ActionResult Index()
-        {
+        {           
+            //_log.Info("Ejecución de customer controller ok");
             return View(_unitOfWork.Customers.GetList());
         }
 

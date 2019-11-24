@@ -10,6 +10,8 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using System.Web.Mvc;
+using log4net;
+using log4net.Core;
 
 namespace Cibertec.Mvc.App_Start
 {
@@ -23,9 +25,19 @@ namespace Cibertec.Mvc.App_Start
                 ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString()));
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+            //Log4net
+            container.RegisterConditional(typeof(ILog),
+                c => typeof(Log4NetAdapter<>).MakeGenericType(c.Consumer.ImplementationType),
+                Lifestyle.Singleton, c => true);
+
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
 
         }
+    }
+
+    public sealed class Log4NetAdapter<T>:LogImpl
+    {
+        public Log4NetAdapter():base(LogManager.GetLogger(typeof(T)).Logger){}
     }
 }

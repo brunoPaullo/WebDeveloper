@@ -13,6 +13,18 @@ namespace Cibertec.Mvc
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //De espefico a generico
+            routes.MapRoute(
+                name: "BusinessPartner",
+                url: "BusinessPartner/{id}/{action}",
+                defaults: new { controller = "Customers", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "DefaultCRUD",
+                url: "{controller}/{id}/{action}"
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
