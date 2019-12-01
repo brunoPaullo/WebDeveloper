@@ -48,6 +48,7 @@
     <Compile Include="NorthWind\IOrdersRepository.cs" />
     <Compile Include="NorthWind\IProductRepository.cs" />
     <Compile Include="NorthWind\ISuppliersRepository.cs" />
+    <Compile Include="NorthWind\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

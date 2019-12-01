@@ -1,0 +1,16 @@
+Security
+	entityframework
+	owin
+
+
+Install-package microsoft.owin.host.systemweb
+Install-package microsoft.owin.security.cookies
+
+
+login post show pasword
+https://stackoverflow.com/questions/1582894/how-to-send-password-securely-over-http
+
+
+Test 
+	OWASP ZAP
+https://github.com/zaproxy/zaproxy/wiki/Downloads

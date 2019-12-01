@@ -1,5 +1,6 @@
 ﻿using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,14 +10,18 @@ using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public OrdersController()
+        public OrdersController(IUnitOfWork IUnitOfWork, ILog log) : base(IUnitOfWork, log)
         {
-            _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
         }
+
+        //private readonly IUnitOfWork _unitOfWork;
+
+        //public OrdersController()
+        //{
+        //    _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
+        //}
         // GET: Orders
         public ActionResult Index()
         {

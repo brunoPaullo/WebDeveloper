@@ -6,6 +6,7 @@ using System.Web.Mvc;
 namespace Cibertec.Mvc.Controllers
 {
     [ErrorActionFilter]
+    [Authorize]
     public class BaseController : Controller
     {
         public readonly IUnitOfWork _unitOfWork;
