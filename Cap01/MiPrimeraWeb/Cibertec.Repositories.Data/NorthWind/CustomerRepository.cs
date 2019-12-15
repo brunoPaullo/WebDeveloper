@@ -46,12 +46,16 @@ namespace Cibertec.Repositories.Dapper.NorthWind
             {
                 var result = connection.Execute(@"Update Customers
                                                    set CompanyName = @Company,
-                                                       ContactName = @contact
+                                                       ContactName = @contact,
+                                                       Country = @country,
+                                                       phone = @Phone
                                                    where CustomerId = @id",
                                                    new
                                                    {
                                                        company = entity.CompanyName,
                                                        contact = entity.ContactName,
+                                                       country = entity.Country,
+                                                       phone = entity.Phone,
                                                        id = entity.CustomerID
                                                    });
                 return true;

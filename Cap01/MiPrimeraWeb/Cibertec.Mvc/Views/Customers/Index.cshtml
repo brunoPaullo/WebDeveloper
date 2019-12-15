@@ -1,57 +1,32 @@
-﻿@model IEnumerable<Cibertec.Models.Customers>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
+@Messages.AlertMessage()
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="#" onclick="cibertec.getModal('@Url.Action("Create")');return false;"
+       data-toggle="modal" data-target="#modal-container" class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus">New</span>
+    </a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContactName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th></th>
-    </tr>
+@*<div id="customerList"></div>*@
+@Html.Partial("_List")
+@Modal.GetModal("customer")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Update", new { id=item.CustomerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
-        </td>
-    </tr>
-}
 
-</table>
+<script src="~/App_JS/cibertec.js"></script>
+<script src="~/App_JS/customer.js"></script>
+
+@*<script type="text/javascript">
+    customer: () => {
+        reloadList: function(){
+
+        }
+    };
+    $(function () {
+        customer.reloadData('customerList', '@Url.Action("GetCustomers","Customers")');
+    })
+    
+</script>*@

@@ -25,14 +25,22 @@ namespace Cibertec.Mvc.Controllers
 
         // GET: Customer
         public ActionResult Index()
-        {           
+        {
             //_log.Info("Ejecución de customer controller ok");
+            //return View();
             return View(_unitOfWork.Customers.GetList());
         }
 
-        public ActionResult Create()
+        // GET: Customer
+        public ActionResult GetCustomers()
         {
-            return View();
+            var customers = _unitOfWork.Customers.GetList();
+            return View("_List", customers);
+        }
+
+        public PartialViewResult Create()
+        {
+            return PartialView("_Create", new Customers());
         }
 
         [HttpPost]
@@ -43,13 +51,13 @@ namespace Cibertec.Mvc.Controllers
                 _unitOfWork.Customers.Insert(customer);
                 return RedirectToAction("Index");
             }
-            return View();
+            return PartialView("_Create", customer);
         }
 
-        public ActionResult Update(string id)
+        public PartialViewResult Update(string id)
         {
             var customer = _unitOfWork.Customers.GetById(id);
-            return View(customer);
+            return PartialView("_Update", customer);
         }
 
 
@@ -63,14 +71,14 @@ namespace Cibertec.Mvc.Controllers
                 _unitOfWork.Customers.Update(customer);
                 return RedirectToAction("Index");
             }
-            return View();
+            return PartialView("_Update", customer);
         }
 
 
-        public ActionResult Delete(string id)
+        public PartialViewResult Delete(string id)
         {
             var customer = _unitOfWork.Customers.GetById(id);
-            return View(customer);
+            return PartialView("_Delete", customer);
         }
 
         //[HttpGet]
@@ -83,7 +91,8 @@ namespace Cibertec.Mvc.Controllers
         public ActionResult DeleteCustomer(string CustomerID)
         {
             _unitOfWork.Customers.Delete(CustomerID);
-            return RedirectToAction("Index");
+            var customer = _unitOfWork.Customers.GetById(CustomerID);
+            return PartialView("_Delete", customer);
 
         }
     }
