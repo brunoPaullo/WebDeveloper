@@ -1,10 +1,12 @@
 ﻿using Cibertec.Models;
 using Cibertec.UnitOfWork;
 using log4net;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
 {
+    [RoutePrefix("Customers")]
     public class CustomersController : BaseController
     {
         //private readonly IUnitOfWork _unitOfWork;
@@ -94,6 +96,28 @@ namespace Cibertec.Mvc.Controllers
             var customer = _unitOfWork.Customers.GetById(CustomerID);
             return PartialView("_Delete", customer);
 
+        }
+
+        [Route("List/{page:int}/{rows:int}")]
+        public PartialViewResult List(int page, int rows)
+        {
+            if (page <= 0 || rows <= 0) return PartialView(new List<Customers>());
+            var startRecord = ((page - 1) * rows) + 1;
+            var endRecord = page * rows;
+            return PartialView("_List", _unitOfWork.Customers.PageList(startRecord, endRecord));
+        }
+
+        //[Route("Count/{rows:int}")] //No funciona
+        public int Count(int rows)
+        {
+            var totalRecords = _unitOfWork.Customers.Count();
+            return totalRecords % rows != 0 ? (totalRecords / rows) + 1 : totalRecords / rows;
+        }
+
+        //[Route("GetString/{param}")]
+        public string GetString(int param)
+        {
+            return "ok";
         }
     }
 }

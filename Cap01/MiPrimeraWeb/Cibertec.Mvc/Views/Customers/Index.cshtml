@@ -12,10 +12,16 @@
     </a>
 </p>
 @*<div id="customerList"></div>*@
-@Html.Partial("_List")
+@*@Html.Partial("_List")*@
+<div class="pagination"></div>
+<div class="content"></div>
+<div class="pagination"></div>
+
+
 @Modal.GetModal("customer")
 
 
+<script src="~/Scripts/jquery.bootpag.min.js"></script>
 <script src="~/App_JS/cibertec.js"></script>
 <script src="~/App_JS/customer.js"></script>
 

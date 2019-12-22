@@ -12,6 +12,7 @@ namespace Cibertec.Mvc
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
 
             //De espefico a generico
             routes.MapRoute(

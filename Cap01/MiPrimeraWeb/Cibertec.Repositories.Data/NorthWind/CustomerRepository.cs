@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using System.Data;
+
 namespace Cibertec.Repositories.Dapper.NorthWind
 {
     public class CustomerRepository : Repository<Customers>, ICustomerRepository
@@ -59,6 +61,26 @@ namespace Cibertec.Repositories.Dapper.NorthWind
                                                        id = entity.CustomerID
                                                    });
                 return true;
+            }
+        }
+
+        public IEnumerable<Customers> PageList(int starRow, int endRow)
+        {
+            if (starRow >= endRow) return new List<Customers>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@starRow", starRow);
+                parameters.Add("@endRow", endRow);
+                return connection.Query<Customers>("dbo.uspCustomerPagedList", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public int Count()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.ExecuteScalar<int>("SELECT COUNT(CustomerId) FROM dbo.Customers");
             }
         }
     }
