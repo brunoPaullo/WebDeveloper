@@ -2,6 +2,7 @@
 
 
 <h2>Edit</h2>
+@Messages.Message("inUse","Edit","danger","Este cliente esta en uso en este momento")
 
 @using (Ajax.BeginForm("Update", new { controller = "Customers" },
     new AjaxOptions
@@ -9,7 +10,7 @@
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "modal-body",
-        OnSuccess = "customer.success('Edit');"
+        OnSuccess = "customer.success('Edit');" + "customer.removeHubCustomer(@Model.Id);"
     },
     htmlAttributes: new { id = "editForm" }
     ))
@@ -119,5 +120,13 @@
     <script type="text/javascript">
     $(function () {
         $.validator.unobtrusive.parse("#editForm");
+        $('#inUse').addClass('hidden');
+        customer.addClass(@Model.Id);
+        customer.validate(@Model.Id);
+
+        customer.closeModal = function () {
+            if (!customer.recordInUse)
+                customer.removeHubCustomer(@Model.Id);
+        }
     })
     </script>

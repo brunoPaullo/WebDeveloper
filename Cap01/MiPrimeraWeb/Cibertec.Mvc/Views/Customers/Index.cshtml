@@ -18,12 +18,23 @@
 <div class="pagination"></div>
 
 
-@Modal.GetModal("customer")
+@Modal.GetModal("customer", "customer.closeModal();")
 
 
 <script src="~/Scripts/jquery.bootpag.min.js"></script>
 <script src="~/App_JS/cibertec.js"></script>
 <script src="~/App_JS/customer.js"></script>
+
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="/signalr/hubs"></script>
+<script type="text/javascript">
+    $(function () {
+        var customerHub = $.connection.customerHub;
+        $.connection.hub.start().done(function () {
+            console.log("Connected to Hub...");
+        });
+    });
+</script>
 
 @*<script type="text/javascript">
     customer: () => {
