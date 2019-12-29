@@ -9,25 +9,25 @@ namespace Cibertec.Mvc
 {
     public class CustomerHub : Hub
     {
-        static List<int> CustomerIds = new List<int>();
+        static List<string> customerIds = new List<string>();
 
-        public void AddCustomer(int id)
+        public void AddCustomerId(string id)
         {
-            if (!CustomerIds.Contains(id))
-                CustomerIds.Add(id);
-            Clients.All.customerStatus(CustomerIds);
+            if (!customerIds.Contains(id))
+                customerIds.Add(id);
+            Clients.All.customerStatus(customerIds);
         }
 
-        public void RemoveCustomer(int id)
+        public void RemoveCustomerId(string id)
         {
-            if (CustomerIds.Contains(id))
-                CustomerIds.Remove(id);
-            Clients.All.customerStatus(CustomerIds);
+            if (customerIds.Contains(id))
+                customerIds.Remove(id);
+            Clients.All.customerStatus(customerIds);
         }
 
         public override Task OnConnected()
         {
-            return Clients.All.customerStatus(CustomerIds);
+            return Clients.All.customerStatus(customerIds);
         }
 
         public void Message(string message)

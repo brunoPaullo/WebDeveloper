@@ -2,7 +2,19 @@
     customer.success = successReload;
     customer.pages = 1;
     customer.rowSize = 10;
-    init(1);
+
+    //Atributos para el manejo del Hub
+    customer.hub = {};
+    customer.ids = [];
+    customer.recordInUse = false;
+    customer.addCustomer = addCustomerId;
+    customer.removeHubCustomer = removeCustomerId;
+    customer.validate = validate;
+    $(function () {
+        connectToHub();
+        init(1);
+    })
+
     //getCustomers();
 
     customer.reloadData = reload;
@@ -25,7 +37,7 @@
         }
     }
 
-    function reload(elementId ,url) {
+    function reload(elementId, url) {
         $.get(url, function (data) {
             $('#' + elementId).html(data);
         })
@@ -64,4 +76,32 @@
         });
     }
 
+    function addCustomerId(id) {
+        customer.hub.server.addCustomerId(id);
+    }
+
+    function removeCustomerId(id) {
+        customer.hub.server.removeCustomerId(id);
+    }
+
+    function connectToHub() {
+        customer.hub = $.connection.customerHub;
+        customer.hub.client.customerStatus = customerStatus;
+
+        //Metodos en el cliente
+        //customer.hub.client.method = method;
+    }
+
+    function customerStatus(customerIds) {
+        console.log(customerIds);
+        customer.ids = customerIds;
+    }
+
+    function validate(id) {
+        customer.recordInUse = (customer.ids.indexOf(id) > -1);
+        if (customer.recordInUse) {
+            $('#inUse').removeClass('hidden');
+            $('#btn-save').html("");
+        }
+    }
 })(window.customer = window.customer || {});

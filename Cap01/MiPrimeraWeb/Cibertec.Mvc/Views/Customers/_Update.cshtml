@@ -10,7 +10,8 @@
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "modal-body",
-        OnSuccess = "customer.success('Edit');" + "customer.removeHubCustomer(@Model.Id);"
+        //OnSuccess = "customer.success('Edit');" + "customer.removeHubCustomer('" +@Model.CustomerID + "');"
+        OnSuccess = "customer.success('Edit');"
     },
     htmlAttributes: new { id = "editForm" }
     ))
@@ -110,7 +111,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10" id="btn-save">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
@@ -121,12 +122,12 @@
     $(function () {
         $.validator.unobtrusive.parse("#editForm");
         $('#inUse').addClass('hidden');
-        customer.addClass(@Model.Id);
-        customer.validate(@Model.Id);
+        customer.addCustomer("@Model.CustomerID");
+        customer.validate("@Model.CustomerID");
 
         customer.closeModal = function () {
             if (!customer.recordInUse)
-                customer.removeHubCustomer(@Model.Id);
+                customer.removeHubCustomer("@Model.CustomerID");
         }
     })
     </script>
