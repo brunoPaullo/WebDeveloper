@@ -1,0 +1,21 @@
+CAP 09 -- 29/12/2019
+SOAP --> XML  --> Protocolo
+REST --> JSON --> {HTTP} --> Arquitectura
+
+UTILES
+--OSI
+
+
+WepApi
+1.- Blank Proyect
+2.- Install OWIN
+	-Install-Package Microsoft.AspNet.WebApi.Core
+	-Install-Package Microsoft.Owin.Host.SystemWeb
+	-Install-Package Microsoft.AspNet.WebApi.Owin
+	-Install-Package SimpleInjector.Integration.WebApi
+	-Install-Package Microsoft.Owin.Security.OAuth
+
+--Trabajo
+	9 Enero
+Cap 7 --> 2 Mantenimientos (modales)
+Cap 8 --> Agregar Siganlr a 2 mantenimientos
