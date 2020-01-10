@@ -5,77 +5,31 @@
 }
 
 <h2>Index</h2>
+@Messages.AlertMessage()
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="#" onclick="cibertec.getModal('@Url.Action("Create")');return false;"
+       data-toggle="modal" data-target="#modal-container" class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-plus">New</span>
+    </a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SupplierID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuantityPerUnit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitsInStock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitsOnOrder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReorderLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discontinued)
-        </th>
-        <th></th>
-    </tr>
+<div class="pagination"></div>
+<div class="content"></div>
+<div class="pagination"></div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupplierID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuantityPerUnit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitsInStock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReorderLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discontinued)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Update", new {  id=item.ProductID  }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.ProductID  })
-        </td>
-    </tr>
-}
+@Modal.GetModal("product", "product.closeModal();")
 
-</table>
+<script src="~/Scripts/jquery.bootpag.min.js"></script>
+<script src="~/App_JS/cibertec.js"></script>
+<script src="~/App_JS/product.js"></script>
+
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="/signalr/hubs"></script>
+<script type="text/javascript">
+    $(function () {
+        var productHub = $.connection.productHub;
+        $.connection.hub.start().done(function () {
+            console.log("Connected to Hub...");
+        });
+    });
+</script>

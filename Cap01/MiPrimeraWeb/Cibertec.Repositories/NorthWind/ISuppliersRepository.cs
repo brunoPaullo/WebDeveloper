@@ -13,5 +13,7 @@ namespace Cibertec.Repositories.NorthWind
         bool Delete(int id);
         new Suppliers GetById(int id);
         new bool Update(Suppliers entity);
+        IEnumerable<Suppliers> PageList(int starRow, int endRow);
+        int Count();
     }
 }

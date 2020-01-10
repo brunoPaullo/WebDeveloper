@@ -1,6 +1,7 @@
 ﻿using Cibertec.Models;
 using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,12 +11,12 @@ using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
 {
-    public class SuppliersController : Controller
+    [RoutePrefix("Suppliers")]
+    public class SuppliersController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public SuppliersController()
+        public SuppliersController(IUnitOfWork unitOfWork, ILog log) : base(unitOfWork, log)
         {
-            _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
+            
         }
         // GET: Suppliers
         public ActionResult Index()
@@ -23,9 +24,9 @@ namespace Cibertec.Mvc.Controllers
             return View(_unitOfWork.Suppliers.GetList());
         }
 
-        public ActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("_Create", new Suppliers());
         }
 
         [HttpPost]
@@ -40,10 +41,10 @@ namespace Cibertec.Mvc.Controllers
         }
 
 
-        public ActionResult Update(int id)
+        public PartialViewResult Update(int id)
         {
             var supplier = _unitOfWork.Suppliers.GetById(id);
-            return View(supplier);
+            return PartialView("_Update", supplier);
         }
 
 
@@ -77,5 +78,20 @@ namespace Cibertec.Mvc.Controllers
 
         }
 
+        [Route("List/{page:int}/{rows:int}")]
+        public PartialViewResult List(int page, int rows)
+        {
+            if (page <= 0 || rows <= 0) return PartialView(new List<Customers>());
+            var startRecord = ((page - 1) * rows) + 1;
+            var endRecord = page * rows;
+            return PartialView("_List", _unitOfWork.Suppliers.PageList(startRecord, endRecord));
+        }
+
+        //[Route("Count/{rows:int}")] //No funciona
+        public int Count(int rows)
+        {
+            var totalRecords = _unitOfWork.Suppliers.Count();
+            return totalRecords % rows != 0 ? (totalRecords / rows) + 1 : totalRecords / rows;
+        }
     }
 }

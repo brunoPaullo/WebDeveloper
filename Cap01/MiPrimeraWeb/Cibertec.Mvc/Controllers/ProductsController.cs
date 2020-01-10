@@ -1,6 +1,7 @@
 ﻿using Cibertec.Models;
 using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,12 +11,12 @@ using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
 {
-    public class ProductsController : Controller
+    [RoutePrefix("Products")]
+    public class ProductsController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public ProductsController()
+        public ProductsController(IUnitOfWork unitOfWork, ILog log) : base(unitOfWork, log)
         {
-            _unitOfWork = new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ToString());
+            
         }
         // GET: Products
         public ActionResult Index()
@@ -23,9 +24,9 @@ namespace Cibertec.Mvc.Controllers
             return View(_unitOfWork.Products.GetList()); ;
         }
 
-        public ActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("_Create", new Products());
         }
 
         [HttpPost]
@@ -39,10 +40,10 @@ namespace Cibertec.Mvc.Controllers
             return View();
         }
 
-        public ActionResult Update(int id)
+        public PartialViewResult Update(int id)
         {
             var product = _unitOfWork.Products.GetById(id);
-            return View(product);
+            return PartialView("_Update", product);
         }
 
 
@@ -62,8 +63,8 @@ namespace Cibertec.Mvc.Controllers
 
         public ActionResult Delete(int id)
         {
-            var customer = _unitOfWork.Products.GetById(id);
-            return View(customer);
+            var product = _unitOfWork.Products.GetById(id);
+            return PartialView("_Delete", product);
         }
 
 
@@ -75,6 +76,21 @@ namespace Cibertec.Mvc.Controllers
             _unitOfWork.Products.Delete(ProductID);
             return RedirectToAction("Index");
 
+        }
+
+        [Route("List/{page:int}/{rows:int}")]
+        public PartialViewResult List(int page, int rows)
+        {
+            if (page <= 0 || rows <= 0) return PartialView(new List<Products>());
+            var startRecord = ((page - 1) * rows) + 1;
+            var endRecord = page * rows;
+            return PartialView("_List", _unitOfWork.Products.PageList(startRecord, endRecord));
+        }
+
+        public int Count(int rows)
+        {
+            var totalRecords = _unitOfWork.Products.Count();
+            return totalRecords % rows != 0 ? (totalRecords / rows) + 1 : totalRecords / rows;
         }
     }
 }

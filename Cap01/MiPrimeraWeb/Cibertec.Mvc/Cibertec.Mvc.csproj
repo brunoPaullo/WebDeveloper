@@ -179,6 +179,8 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="SupplierHub.cs" />
+    <Compile Include="ProductHub.cs" />
     <Compile Include="CustomerHub.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +192,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_JS\cibertec.js" />
+    <Content Include="App_JS\supplier.js" />
+    <Content Include="App_JS\product.js" />
     <Content Include="App_JS\customer.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -244,18 +248,20 @@
     <Content Include="Views\Customers\_Create.cshtml" />
     <Content Include="Views\Customers\_Update.cshtml" />
     <Content Include="Views\Customers\_Delete.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Update.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Suppliers\Create.cshtml" />
-    <Content Include="Views\Suppliers\Update.cshtml" />
-    <Content Include="Views\Suppliers\Delete.cshtml" />
+    <Content Include="Views\Products\_Create.cshtml" />
+    <Content Include="Views\Products\_Update.cshtml" />
+    <Content Include="Views\Products\_Delete.cshtml" />
+    <Content Include="Views\Suppliers\_Create.cshtml" />
+    <Content Include="Views\Suppliers\_Update.cshtml" />
+    <Content Include="Views\Suppliers\_Delete.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Employees\Update.cshtml" />
+    <Content Include="Views\Employees\_Update.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customers\_List.cshtml" />
+    <Content Include="Views\Products\_List.cshtml" />
+    <Content Include="Views\Suppliers\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
