@@ -1,4 +1,4 @@
-CREATE PROCEDURE uspSupplierPagedList
+ALTER PROCEDURE uspSupplierPagedList
 (
 	@starRow INT,
 	@endRow INT
@@ -10,46 +10,34 @@ BEGIN
 	WITH SupplierResult AS
 	(
 		SELECT
-			EmployeeID, 
-			LastName, 
-			FirstName, 
-			Title, 
-			TitleOfCourtesy, 
-			BirthDate, 
-			HireDate, 
+			SupplierID, 
+			CompanyName, 
+			ContactName, 
+			ContactTitle, 
 			[Address], 
 			City, 
 			Region, 
 			PostalCode, 
 			Country, 
-			HomePhone, 
-			Extension, 
-			Photo, 
-			Notes, 
-			ReportsTo, 
-			PhotoPath,
-			ROW_NUMBER() OVER (ORDER BY EmployeeID) AS Rownum
-		FROM [dbo].[Employees]
+			Phone, 
+			Fax, 
+			HomePage,
+			ROW_NUMBER() OVER (ORDER BY SupplierID) AS Rownum
+		FROM [dbo].[Suppliers]
 	)
 	SELECT
-			EmployeeID, 
-			LastName, 
-			FirstName, 
-			Title, 
-			TitleOfCourtesy, 
-			BirthDate, 
-			HireDate, 
+			SupplierID, 
+			CompanyName, 
+			ContactName, 
+			ContactTitle, 
 			[Address], 
 			City, 
 			Region, 
 			PostalCode, 
 			Country, 
-			HomePhone, 
-			Extension, 
-			Photo, 
-			Notes, 
-			ReportsTo, 
-			PhotoPath
+			Phone, 
+			Fax, 
+			HomePage
 		FROM SupplierResult
 		WHERE Rownum BETWEEN @starRow AND @endRow
 END
