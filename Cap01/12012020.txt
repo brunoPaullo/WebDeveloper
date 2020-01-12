@@ -4,3 +4,24 @@ solicitar token
 solicitar lista de clientes
 
 https://stackoverflow.com/questions/39465983/where-to-store-bearer-token-in-mvc-from-web-api
+
+
+Cap 10
+--> SPA
+
+-SEO
+	-Optimización (KeyWords, NamePages, Controllers)
+	-Posicionamiento
+	-Pago 
+-SEM
+	-Optimización (No)
+	-Marketing / criterios de mercadotecnia
+	-Pago (Obligatorio)
+
+1.- https://nodejs.org/es/download/
+2.- Install Visual Studio Code
+
+-Transpilación (Alto Nivel)
+	--TypeScript --> JavaScript
+	--Razor --> Html
+-Compilación : De Alto Nivel a Lenguaje Maquina (Bajo Nivel)
