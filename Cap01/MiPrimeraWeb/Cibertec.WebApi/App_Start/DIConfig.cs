@@ -1,5 +1,7 @@
 ﻿using Cibertec.Repositories.Dapper.NorthWind;
 using Cibertec.UnitOfWork;
+using log4net;
+using log4net.Core;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
@@ -19,8 +21,23 @@ namespace Cibertec.WebApi.App_Start
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             container.Register<IUnitOfWork>(() => new NorthWindUnitOfWork(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString));
+            /*Log4net*/
+            container.RegisterConditional(typeof(ILog), c => typeof(Log4NetAdapter<>)
+                .MakeGenericType(c.Consumer.ImplementationType), Lifestyle.Singleton, c => true);
+
             container.Verify();
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
         }
-    }
+
+        public sealed class Log4NetAdapter<T> : LogImpl
+        {
+            public Log4NetAdapter() : base(LogManager.GetLogger(typeof(T)).Logger)
+            {
+
+            }
+        }
+    }    
 }
+
+
+    

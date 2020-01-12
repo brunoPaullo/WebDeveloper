@@ -14,7 +14,8 @@ WepApi
 	-Install-Package Microsoft.AspNet.WebApi.Owin
 	-Install-Package SimpleInjector.Integration.WebApi
 	-Install-Package Microsoft.Owin.Security.OAuth
-
+	-Install-Packkage Log4Net
+	-Install-Package Microsoft.AspNet.WebApi.Extensions.Compression.Server.Owin
 --Trabajo
 	9 Enero
 Cap 7 --> 2 Mantenimientos (modales)

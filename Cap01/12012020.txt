@@ -1,0 +1,6 @@
+Tarea N#4
+Lamar el servicio web(api)
+solicitar token
+solicitar lista de clientes
+
+https://stackoverflow.com/questions/39465983/where-to-store-bearer-token-in-mvc-from-web-api

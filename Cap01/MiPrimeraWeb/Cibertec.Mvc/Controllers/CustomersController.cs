@@ -104,6 +104,12 @@ namespace Cibertec.Mvc.Controllers
             if (page <= 0 || rows <= 0) return PartialView(new List<Customers>());
             var startRecord = ((page - 1) * rows) + 1;
             var endRecord = page * rows;
+
+            /*
+             Solicitar token
+             var token = llamartoken(unsername,pasword,grant_type)
+             list<customers> lscustomers = llamar al servicio(page, rows, token);
+             */
             return PartialView("_List", _unitOfWork.Customers.PageList(startRecord, endRecord));
         }
 
