@@ -1,7 +1,12 @@
 ﻿using Cibertec.Models;
 using Cibertec.UnitOfWork;
 using log4net;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Mvc;
 
 namespace Cibertec.Mvc.Controllers
@@ -101,16 +106,53 @@ namespace Cibertec.Mvc.Controllers
         [Route("List/{page:int}/{rows:int}")]
         public PartialViewResult List(int page, int rows)
         {
-            if (page <= 0 || rows <= 0) return PartialView(new List<Customers>());
-            var startRecord = ((page - 1) * rows) + 1;
-            var endRecord = page * rows;
+            Dictionary<string, string> tokenDetails = null;
 
-            /*
-             Solicitar token
-             var token = llamartoken(unsername,pasword,grant_type)
-             list<customers> lscustomers = llamar al servicio(page, rows, token);
-             */
-            return PartialView("_List", _unitOfWork.Customers.PageList(startRecord, endRecord));
+            //Solicitud de Token
+            using (var client = new HttpClient())
+            {
+                var login = new Dictionary<string, string>
+                   {
+                       {"grant_type", "password"},
+                       {"username", "bruno.paullo@cibertec.com.pe"},
+                       {"password", "CBT12345"},
+                   };
+
+                var resp = client.PostAsync("http://localhost:54442/token", new FormUrlEncodedContent(login));
+                resp.Wait(TimeSpan.FromSeconds(10));
+
+                if (resp.IsCompleted)
+                {
+                    if (resp.Result.Content.ReadAsStringAsync().Result.Contains("access_token"))
+                    {
+                        tokenDetails = JsonConvert.DeserializeObject<Dictionary<string, string>>(resp.Result.Content.ReadAsStringAsync().Result);
+                    }
+                }
+            }
+
+            //Solicitude de lista de clientes
+            var customerList = new List<Customers>();
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenDetails["access_token"]);
+                var result = client.GetAsync("http://localhost:54442/Customer/list/" + page + "/" + rows);
+                result.Wait(TimeSpan.FromSeconds(10));
+                if (result.IsCompleted)
+                {
+                    if (result.Result.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        Console.WriteLine("Authorization failed. Token expired or invalid.");
+                    }
+                    else
+                    {
+                        var response = result.Result.Content.ReadAsStringAsync().Result;
+                        customerList = JsonConvert.DeserializeObject<List<Customers>>(response);
+                    }
+                }
+
+            }
+            
+            return PartialView("_List", customerList);
         }
 
         //[Route("Count/{rows:int}")] //No funciona
