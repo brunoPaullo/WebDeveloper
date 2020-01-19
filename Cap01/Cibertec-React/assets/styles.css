@@ -1,0 +1,51 @@
+.container-background {
+    background: url('imgs/login.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.full-height-row {
+    height: 100vh;
+}
+
+.panel-login {
+    transform: translateY(35%);
+    display: inline-block;
+    width: 400px;
+}
+
+.panel-list {
+    margin-top: 3rem;
+    display: inline-block;
+    width: 600px;
+}
+
+.panel-list--empty {
+    margin-top: 20rem;
+}
+
+.login-header-img {
+    height: 80px;
+}
+/*
+.login-token-preview {     
+    margin-top: 1rem;     
+    overflow: hidden;     
+    white-space: nowrap;     
+    text-overflow: ellipsis; 
+}
+*/
+.page-not-found {
+    color: #80d7ff;
+    padding-top: 35vh;
+    font-size: 7vw;
+}
+
+.page-not-found-small {
+    color: transparent;
+}
+
+.list-icon {
+    padding-right: .5rem;
+    padding-left: .5rem;
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+https://gitlab.com/ivan.uribe/vs-webdev
+
+--PowerShell
+Get-ExecutionPolicy
+Get-ExecutionPolicy -list
+Set-ExecutionPolicy RemoteSigned
+S
+Get-ExecutionPolicy -list
+
+
+--VSCODE
+terminal 
+webpack - yes
+npm install --save-dev webpack
+
+
+npm install typescript@3.7.5 --save-dev
+npm list -g --depth=0
+
+
+--GLOBAL
+npm install -g typescript
+
+npm install --save @types/react
+
+
+--Update npm install
+react-redux@5.0.3 @types/react-redux@4.4.37 --save-dev
+
+--extensions open in browser
+
+--WEBAPI
+
