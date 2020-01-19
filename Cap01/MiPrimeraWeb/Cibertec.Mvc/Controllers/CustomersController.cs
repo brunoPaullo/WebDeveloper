@@ -149,7 +149,6 @@ namespace Cibertec.Mvc.Controllers
                         customerList = JsonConvert.DeserializeObject<List<Customers>>(response);
                     }
                 }
-
             }
             
             return PartialView("_List", customerList);

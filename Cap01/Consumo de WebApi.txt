@@ -1,0 +1,50 @@
+1.API
+/*Servicio a ser consumido por el proyecto MVC:*/
+        [HttpGet]
+        [Route("list/{page:int}/{rows:int}")]
+        public IHttpActionResult GetList(int page, int rows)
+        {
+            if (page <= 0 || rows <= 0) return Ok(new List<Customers>());
+            var startRecord = ((page - 1) * rows) + 1;
+            var endRecord = page * rows;
+
+            return Ok(_unit.Customers.PagedList(startRecord, endRecord));
+        }
+
+2.WEB
+
+[Route("List/{page:int}/{rows:int}")]
+        public async Task<PartialViewResult> List(int page, int rows)
+        {
+            /*
+             * Si no se consume el servicio:
+             * 
+            if (page <= 0 || rows <= 0) return PartialView(new List<Customers>());
+            var startRecord = ((page - 1) * rows) + 1;
+            var endRecord = page * rows;
+            return PartialView("_List", _unit.Customers.PagedList(startRecord, endRecord));
+            */
+
+            /*Si se consume el servicio:*/
+            //Paso 1: Solicitar token
+            var httpClient = new HttpClient();
+            var credential = new Dictionary<string, string>
+            {
+                { "grant_type", "password" },
+                { "username", "ivanuribe@gmail.com" },
+                { "password", "Cibertec2020" }
+            };
+
+            var token = await httpClient.PostAsync("http://localhost:55724/token",
+                new FormUrlEncodedContent(credential));
+            var tokenContent = token.Content.ReadAsStringAsync().Result;
+            var tokenDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenContent);
+
+            //Paso 2: Consumir Servicio
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+                tokenDictionary["access_token"]);
+            var json = await httpClient.GetStringAsync("http://localhost:55724/customer/list/" + page+"/"+rows);
+
+            List<Customers> lstCustomers = JsonConvert.DeserializeObject<List<Customers>>(json);
+            return PartialView("_List", lstCustomers);
+        }
